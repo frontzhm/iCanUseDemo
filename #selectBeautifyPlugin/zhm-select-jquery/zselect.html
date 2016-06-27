@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>Making Better Select Elements with jQuery and CSS3 | Tutorialzine Demo| zhm 改写了一部分</title>
+  <link href="http://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="css/zselectstyle.css" />
+</head>
+
+<body>
+  <div id="page">
+  <h1>下拉框的美化</h1>
+    <form action="post" action="">
+    <h2>普通的下拉框</h2>
+      <select name="" class="changeNativeDropdown">
+        <option value="0" selected>选择地区</option>
+        <option value="1">北京</option>
+        <option value="2">上海</option>
+        <option value="3">南京</option>
+      </select>
+      <h2> 特殊要求的下拉框 如有链接</h2>
+      <!-- 如果有链接或者特殊要求的话 -->
+      <select name="" class="changeNativeDropdown">
+        <option value="0" selected><a href="">选择地区</a></option>
+        <option value="1" data-link="http://www.baidu.com"><a href="">北京</a></option>
+        <option value="2"><a href="">上海</a></option>
+        <option value="3"><a href="">南京</a></option>
+      </select>
+    </form>
+    <!-- 
+    <div class="zselect" data-value="">
+      <i class="fa fa-angle-down"></i>
+      <div class="zselectTxt">选择地区</div>
+      <ul class="zselectList">
+        <li class="zoption" data-value="0" data-skip="1">选择地区 </li>
+        <li class="zoption" data-value="1">北京</li>
+        <li class="zoption" data-value="2">上海</li>
+        <li class="zoption" data-value="3">南京</li>
+      </ul>
+    </div>
+     -->
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+  <script src="js/zselect.js"></script>
+</body>
+
+</html>
