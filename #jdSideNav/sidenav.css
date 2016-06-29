@@ -1,0 +1,147 @@
+/*清除样式*/
+body,ul,dt,dd{margin: 0;padding: 0;font:14px "microsoft yahei";}
+ul{
+  list-style: none;
+}
+
+/*清浮动*/
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.rel {
+  position: relative;
+}
+
+.abs {
+  position: absolute;
+}
+
+#textbox{
+  width: 1000px;
+  margin:50px auto;
+}
+/*左侧分类开始*/
+
+.ipCatWrap {
+  float: left;
+  width: 270px;
+}
+
+.ipCatWrap .CatPanelHead {
+  background-color: #ff3600;
+  text-align: center;
+  color: #fff;
+  line-height: 43px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.catPanelBody {
+  position: relative;
+}
+
+.ipCatList {
+  border: 1px solid #ff5600;
+  border-right: 0;
+}
+
+a.ipTopCat {
+  display: block;
+  padding-left: 20px;
+  padding-right: 20px;
+  line-height: 35px;
+  height: 35px;
+  background-color: #ff5600;
+  overflow: hidden;
+  color: #fff;
+}
+
+.ipTopCat .fa-angle-right {
+  position: absolute;
+  line-height: 35px;
+  right: 20px;
+}
+
+.ipCatItem:hover .ipTopCat {
+  background-color: #fff;
+  color: #ff5600;
+}
+
+.ipCatItem:hover .ipTopCat .fa-angle-right {
+  color: #fff;
+  background-color: #fff;
+  right: -1px;
+  z-index: 2;
+}
+
+.ipCatItem:hover .ipCatSubmenu {
+  display: block;
+}
+
+.ipCatItem a:hover {
+  color: #ff5600;
+}
+
+.ipCatSubmenu {
+  position: absolute;
+  display: none;
+  width: 880px;
+  left: 269px;
+  top: 0px;
+  z-index: 1;
+  border: 1px solid #ff5600;
+  /*border-left: 0;*/
+  background-color: #fff;
+  min-height: 100%;
+  padding: 0px 30px 10px;
+  box-sizing: border-box;
+}
+
+.ipCatSubmenuItem {
+  margin-top: 10px;
+}
+
+.subMenuTitle {
+  float: left;
+  font-weight: bold;
+  width: 75px;
+  text-align: right;
+}
+
+.subMenuCnt {
+  float: left;
+  display: block;
+  width: 720px;
+  margin-left: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.subMenuCnt a {
+  font-size: 13px;
+  margin-right: 10px;
+}
+
+.subMenuTitle .fa-angle-right {
+  margin-left: 10px;
+}
