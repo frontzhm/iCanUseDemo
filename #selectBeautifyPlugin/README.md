@@ -1,6 +1,6 @@
 
 
-HTML这边需要的结构  注意加类名changeNativeDropdown
+HTML这边需要的结构  注意加类名beautifySelect
 
 "<select name="" class="changeNativeDropdown">
     <option value="0" selected>选择地区</option>
