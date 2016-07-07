@@ -3,10 +3,6 @@ function drag(eleid) {
   function id(id) {
     return document.getElementById(id);
   }
-
-  function c(str) {
-    console.log(str);
-  }
   // 鼠标按下的时候获得鼠标和该元素的相对位置
   function fndown(e, left, top) {
     var x = e.clientX,
@@ -58,12 +54,10 @@ function drag(eleid) {
   oele.onmousedown = function(e) {
     e = e || window.event;
     fndown(e, left, top);
-    console.log(left)
       // 鼠标移动
     document.onmousemove = function(e) {
         e = e || window.event;
         fnmove(e, relx, rely, neww, newh);
-        console.log(left)
       }
       // 鼠标松开的时候
     document.onmouseup = function() {
