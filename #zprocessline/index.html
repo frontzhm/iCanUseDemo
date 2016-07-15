@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  body,
+  ul,
+  li {
+    margin: 0;
+    padding: 0;
+    font-family: "microsoft yahei"
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  #box {
+    width: 1150px;
+    margin: 100px auto;
+  }
+  /*加zdone表示已经完成的 加zdone和cur表示当前的 */
+  
+  .zprocessLineWrap {
+    height: 18px;
+    font-size: 0;
+  }
+  
+  .zlineItem {
+    display: inline-block;
+  }
+  
+  .zpcircle {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+    border: 3px solid #ccc;
+    border-radius: 18px;
+    vertical-align: middle;
+    color: #ccc;
+    font-size: 12px;
+    position: relative;
+  }
+  
+  .zptext {
+    display: inline-block;
+    position: absolute;
+    width: 160px;
+    height: 36px;
+    line-height: 36px;
+    text-align: center;
+    left: -80px;
+    top: 14px;
+    font-size: 16px;
+  }
+  
+  .zlineItem:nth-last-of-type(1) .zpcircle:before {
+    position: absolute;
+    content: "";
+    display: inline-block;
+    height: 4px;
+    background-color: #ccc;
+    left: 18px;
+    top: 5px;
+  }
+  
+  .zpline {
+    display: inline-block;
+    height: 4px;
+    /* 总宽度 = (小圆圈的宽度+线的宽度)*流程数量
+		      1150 = (20+x)*6
+		      计算x = 171,x/2=85
+		   */
+    width: 171px;
+    background-color: #ccc;
+    vertical-align: middle;
+  }
+  
+  .zlineItem:nth-of-type(1) .zpline,
+  .zlineItem:nth-last-of-type(1) .zpcircle:before {
+    /* 总宽度 = (小圆圈的宽度+线的宽度)*流程数量
+		      1150 = (20+x)*6
+		      计算x = 171,x/2=85
+		   */
+    width: 85px;
+  }
+  
+  .zlineItem.zdone .zpline,
+  .zlineItem.zdone:nth-last-of-type(1) .zpcircle:before {
+    background-color: #ff5600;
+  }
+  
+  .zlineItem.zdone .zpcircle {
+    border-color: #ff5600;
+    color: #ff5600;
+  }
+  
+  .zlineItem.zdone .zptext {
+    color: #000;
+  }
+  
+  .zlineItem.cur .zpcircle {
+    background-color: #ff5600;
+    color: #fff;
+  }
+  
+  {
+    background-color: #ff5600;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="box">
+    <div class="zprocessLineWrap mt50">
+      <div>
+        <ul>
+          <!-- 加zdone表示已经完成的 加zdone和cur表示当前的 -->
+          <li class="zlineItem zdone">
+            <span class="zpline"></span>
+            <span class="zpcircle">1<strong class="zptext">接单创作</strong></span>
+          </li>
+          <li class="zlineItem zdone">
+            <span class="zpline"></span>
+            <span class="zpcircle">2<strong class="zptext">验收通过</strong></span>
+          </li>
+          <li class="zlineItem zdone">
+            <span class="zpline"></span>
+            <span class="zpcircle">3<strong class="zptext">签署合同</strong></span>
+          </li>
+          <li class="zlineItem zdone cur">
+            <span class="zpline"></span>
+            <span class="zpcircle">4<strong class="zptext">审核</strong></span>
+          </li>
+          <li class="zlineItem">
+            <span class="zpline"></span>
+            <span class="zpcircle">5<strong class="zptext">上传文件</strong></span>
+          </li>
+          <li class="zlineItem">
+            <span class="zpline"></span>
+            <span class="zpcircle">6<strong class="zptext">接收稿费</strong></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
