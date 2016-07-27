@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>倒计时</title>
+</head>
+
+<body>
+  <div class="clock">
+    <p>离<span class="endtime"></span>还剩<span class="days"></span>天<span class="hours"></span>小时<span class="minutes"></span>分钟<span class="seconds"></span>秒</p>
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+  <script>
+  function zcountdown(endtime) {
+
+    var endms = Date.parse(endtime),
+      curms = Date.parse(new Date),
+      gapms = endms - curms;
+    // 时间差小于0
+    if (gapms < 0) {
+      throw new Error("结束时间必须大于" + new Date);
+    }
+    var seconds = Math.floor(gapms / 1000 % (60)),
+      minutes = Math.floor(gapms / (1000 * 60) % (60)),
+      hours = Math.floor(gapms / (1000 * 60 * 60) % (24)),
+      days = Math.floor(gapms / (1000 * 60 * 60 * 24));
+    return {
+      gapms: gapms,
+      seconds: seconds,
+      minutes: minutes,
+      hours: hours,
+      days: days
+    };
+  }
+
+  var clock = document.querySelector(".clock");
+  var endtime = "	2017-07-28";
+
+
+
+  function html(str) {
+    this.innerHTML = str;
+  }
+
+  function twoNum(str) {
+    return ("0" + str).slice(-2);
+  }
+
+  var oendtime = document.querySelector(".endtime"),
+    odays = document.querySelector(".days"),
+    ohours = document.querySelector(".hours"),
+    ominutes = document.querySelector(".minutes"),
+    oseconds = document.querySelector(".seconds");
+
+  function populateTime(endtime) {
+    var otime = zcountdown(endtime);
+    html.call(oendtime,endtime);
+    html.call(odays,twoNum(otime.days));
+    html.call(ohours,twoNum(otime.hours));
+    html.call(ominutes,twoNum(otime.minutes));
+    html.call(oseconds,twoNum(otime.seconds));
+  }
+
+  // populateTime(endtime);
+  // var timer = setInterval(function() {
+  //   if (zcountdown(endtime).gapms > 0) {
+  //     populateTime(endtime);
+  //   } else {
+  //     clearInterval(timer);
+  //     timer = null;
+  //   }
+  // }, 1000);
+  // 想定时十分钟的话
+  var end1 = new Date(Date.parse(new Date) + 10 * 60 * 1000);
+  populateTime(end1);
+  var timer = setInterval(function() {
+    if (zcountdown(endtime).gapms > 0) {
+      populateTime(end1);
+    } else {
+      clearInterval(timer);
+      timer = null;
+    }
+  }, 1000);
+
+  
+
+
+  </script>
+</body>
+
+</html>
