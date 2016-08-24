@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>轮播图</title>
+  <style>
+  /*必要的代码 slide相对于slidelist绝对定位*/
+  
+  .zslidelist {
+    position: relative;
+    width: 500px;
+    height: 300px;
+  }
+  
+  .zslide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    /*切换幻灯片的代码*/
+    opacity: 0;
+    z-index: 0;
+    /*transition: opacity 1s  ease 0s;*/
+    transition: opacity 1s ease 0s;
+  }
+  /*显示的幻灯片*/
+  
+  .zshowing {
+    opacity: 1;
+    z-index: 2;
+  }
+  /*美化的样式*/
+  
+  .zslide:nth-of-type(1) {
+    background-color: #f69;
+  }
+  
+  .zslide:nth-of-type(2) {
+    background-color: #6f9;
+  }
+  
+  .zslide:nth-of-type(3) {
+    background-color: #69f;
+  }
+  /*控件样式*/
+  
+  .zpageitem {
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: #ccc;
+    display: inline-block;
+  }
+  
+  .zpageitem.zshowing {
+    background-color: #69f;
+  }
+  /*js加载不成功的时候 */
+  
+  .zslidectrl {
+    display: none;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="zslidewrap">
+    <ul class="zslidelist">
+      <li class="zslide zshowing"></li>
+      <li class="zslide"></li>
+      <li class="zslide"></li>
+    </ul>
+    <!-- 控件:上一张 下一张 停止 小索引 -->
+    <div class="zslidectrl">
+      <span class="zprev">上一张</span>
+      <span class="znext">下一张</span>
+      <span class="zpause">停止</span>
+      <ol class="zpagination">
+        <li class="zpageitem zshowing"></li>
+        <li class="zpageitem"></li>
+        <li class="zpageitem"></li>
+      </ol>
+    </div>
+  </div>
+  <script>
+  // curslide 和zshowing的索引一致
+  var curslide = 0;
+  var slidelist = document.querySelector(".zslidelist");
+  var slides = document.querySelectorAll(".zslide");
+  var len = slides.length
+    /*为了增强友好性 万一没加载成功js*/
+  document.querySelector(".zslidectrl").style.display = "block";
+  /*为了增强友好性 万一没加载成功js*/
+  /* function nextShowing() {
+     slides[curslide].className = "zslide";
+     // 0%3 = 0; 1%3=1; 2%3=2;///// 3%3=0;4%3=1;
+     curslide = (++curslide) % len;
+     slides[curslide].className = "zslide zshowing";
+   }*/
+  var loop = setInterval(nextShowing, 1000);
+  /* 以下是控件内容 没控件的时候上面就行*/
+  var pausebtn = document.querySelector(".zpause");
+  var prevbtn = document.querySelector(".zprev");
+  var nextbtn = document.querySelector(".znext");
+  var zpageitems = document.querySelectorAll(".zpageitem");
+  // 是否在播放
+  var playing = true;
+  pausebtn.onclick = function() {
+    playing ? pauseSlideShow() : playSlideShow();
+  }
+  prevbtn.onclick = function() {
+    prevShowing();
+    pauseSlideShow();
+  }
+  nextbtn.onclick = function() {
+    nextShowing();
+    pauseSlideShow();
+  }
+
+  for (var i = 0; i < len; i++) {
+    zpageitems[i].onclick = (function(n) {
+      return function() {
+        goToSlide(n);
+      };
+    })(i);
+  }
+
+  function pauseSlideShow() {
+    clearInterval(loop);
+    loop = null;
+    playing = false;
+    pause.innerHTML = "播放";
+  }
+
+  function playSlideShow() {
+    loop = setInterval(nextShowing, 1000);
+    playing = true;
+    pause.innerHTML = "停止"
+  }
+
+  function goToSlide(n) {
+    slides[curslide].className = "zslide";
+    // 小索引
+    zpageitems[curslide].className = "zpageitem";
+    // 因为n可能小于0 比如0的时候 0-1 = -1  这句是关键 恩 很关键
+    curslide = (n + len) % len;
+    slides[curslide].className = "zslide zshowing";
+    // 小索引
+    zpageitems[curslide].className = "zpageitem zshowing";
+  }
+
+  function nextShowing() {
+    goToSlide(curslide + 1);
+
+  }
+
+  function prevShowing() {
+    goToSlide(curslide - 1);
+  }
+  </script>
+</body>
+
+</html>
