@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+  /**
+   * 1.解析字符串
+   * 我们都知道，JavaScript对象可以序列化为JSON，JSON也可以解析成对象，但是问题是如果出现了一个既不是JSON也不是对象的”东西”，转成哪一方都不方便，那么eval就可以派上用场
+   * 因为 eval 可以执行字符串表达式，我们希望将 obj 这个字符串对象 执行成真正的对象，那么就需要用eval。但是为了避免eval 将带 {} 的 obj 当语句来执行，我们就在obj的外面套了对 ()，让其被解析成表达式
+   */
+  var obj = "{name:'hua',age:1}";
+  var objnew = eval("(" + obj + ")");
+  console.log(objnew)
+
+
+  /**
+		 * 2.&判断一个数是否为2的n次幂，可以将其与自身减一相与
+		 
+& 按位与
+| 按位或
+^ 按位异或
+1. 按位与运算 按位与运算符"&"是双目运算符。其功能是参与运算的两数各对应的二进位相与。只有对应的两个二进位均为1时，结果位才为1 ，否则为0。参与运算的数以补码方式出现。
+例如：9&5可写算式如下： 00001001 (9的二进制补码)&00000101 (5的二进制补码) 00000001 (1的二进制补码)可见9&5=1。
+  按位与运算通常用来对某些位清0或保留某些位。例如把a 的高八位清 0 ， 保留低八位， 可作 a&255 运算 ( 255 的二进制数为0000000011111111)。
+main(){
+int a=9,b=5,c;
+c=a&b;
+printf("a=%d\nb=%d\nc=%d\n",a,b,c);
+}
+2. 按位或运算 按位或运算符“|”是双目运算符。其功能是参与运算的两数各对应的二进位相或。只要对应的二个二进位有一个为1时，结果位就为1。参与运算的两个数均以补码出现。
+例如：9|5可写算式如下： 00001001|00000101
+00001101 (十进制为13)可见9|5=13
+main(){
+int a=9,b=5,c;
+c=a|b;
+printf("a=%d\nb=%d\nc=%d\n",a,b,c);
+}
+3. 按位异或运算 按位异或运算符“^”是双目运算符。其功能是参与运算的两数各对应的二进位相异或，当两对应的二进位相异时，结果为1。参与运算数仍以补码出现，例如9^5可写成算式如下： 00001001^00000101 00001100 (十进制为12)
+main(){
+int a=9;
+a=a^15;
+printf("a=%d\n",a);
+}
+		 */
+  var number = 8;
+  (number & number - 1) === 0
+  /**
+   * 3.^:不同第三个变量，就可以交换两个变量的值
+   * 
+   */
+  var a = 4,b = 3
+  a = a ^ b // 7
+  b = a ^ b // 4
+  a = b ^ a // 3
+  /**
+   * 4.格式化Date:
+   * 
+   */
+  // 1)想得到format后的时间？现在不用再get年月日时分秒了，三步搞定
+  var temp = new Date();
+  var regex = /\//g;
+  (temp.toLocaleDateString() + ' ' + temp.toLocaleTimeString().slice(2)).replace(regex,'-');
+   
+  // "2015-5-7 9:04:10"
+  // 2)想将format后的时间转换为时间对象？直接用Date的构造函数
+  new Date("2015-5-7 9:04:10");
+ 
+// Thu May 07 2015 09:04:10 GMT+0800 (CST)
+// 3)想将一个标准的时间对象转换为unix时间戳？valueOf搞定之
+(new Date).valueOf();
+ 
+// 1431004132641
+// 4)许多朋友还提醒了这样可以快速得到时间戳
++new Date
+
+/**
+ * 5.转义URI
+ */
+// 需要将url当做参数在路由中传递，现在转义之
+var url = encodeURIComponent('http://segmentfault.com/questions/newest')
+ 
+// "http%3A%2F%2Fsegmentfault.com%2Fquestions%2Fnewest"
+// 再反转义
+decodeURIComponent(url)
+// "http://segmentfault.com/questions/newest"
+/**
+ * 6.Number:希望保留小数点后的几位小数，不用再做字符串截取了，toFixed拿走,参数范围为0~20，不写默认0
+ */
+var num = 2.4325432;
+num1=num.toFixed()
+num2 = num.toFixed(3)
+num3 = num.toFixed(20)
+console.log(num) // 2.4325432 
+console.log(num1) //2
+console.log(num2) //2.433 
+console.log(num3) //2.43254320000000000000 
+/**
+ * 7.类型 typeof Object.prototype.toString.call(para)
+ */
+/**
+ * Array
+
+具体的api这里介绍的很详细。
+https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Glob…
+这里就提几句：
+join,pop,push,reverse,shift,sort,splice,unshift会改变原数组
+
+concat,indexOf,lastIndexOf,slice,toString不会改变原数组
+
+map,filter,some,every,reduce,forEach这些迭代方法不会改变原数组
+
+几个注意点：
+
+1 shift,pop会返回那个被删除的元素
+2 splice 会返回被删除元素组成的数组，或者为空数组
+3 push 会返回新数组长度
+4 some 在有true的时候停止
+5 every 在有false的时候停止
+6 上述的迭代方法可以在最后追加一个参数thisArg,它是执行 callback 时的 this 值。
+ */
+  </script>
+</body>
+
+</html>
