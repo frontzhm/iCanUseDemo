@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    .file-label {
+        padding: 10px 20px;
+        display: inline-block;
+        background-color: #6fb3e0;
+        cursor: pointer;
+        color: #fff;
+    }
+    
+    .file-label:hover {
+        background-color: #6fb9e0;
+    }
+    
+    input[type="file"] {
+        display: none;
+    }
+    </style>
+</head>
+
+<body>
+<!-- 美化 input type="file"  -->
+<!-- 原理:利用label的for属性,点击label相当于点击对应的input -->
+    <div>
+        <label for="1" class="file-label">选择文件</label>
+        <input type="file" id="1">
+        <img>
+    </div>
+    <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+    <script>
+    // 这里的代码 不需要  单纯的为了了解file
+    $('input').change(function() {
+        if (this.files && this.files[0]) {
+            console.log(this.files)
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                console.log(e)
+                selectedImage = e.target.result;
+                $('img').attr('src', selectedImage);
+            };
+            reader.readAsDataURL(this.files[0]);
+        }
+    })
+    </script>
+</body>
+
+</html>
