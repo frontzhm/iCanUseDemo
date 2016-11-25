@@ -24,11 +24,14 @@
 </head>
 
 <body>
+<!-- https://developer.mozilla.org/zh-CN/docs/Web/API/FileList -->
 <!-- 美化 input type="file"  -->
 <!-- 原理:利用label的for属性,点击label相当于点击对应的input -->
     <div>
-        <label for="1" class="file-label">选择文件</label>
-        <input type="file" id="1">
+    <!-- multi支持一次选择多个文件 -->
+    <!-- 所有type属性(attribute)为file的 <input> 元素都有一个files属性(property),用来存储用户所选择的文件 -->
+        <label for="file1" class="file-label" >选择文件</label>
+        <input type="file" id="file1" multiple>
         <img>
     </div>
     <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
