@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>正方形的问题</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    
+    html,
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+    /*方法一:padding-bottom*/
+    
+    .box .square {
+        width: 45%;
+        /*这里可以用背景图*/
+        background-color: #f69;
+    }
+    
+    .box .square:before {
+        content: "";
+        /*只有inline-block 和block可以设置padding-bottom*/
+        display: inline-block;
+        padding-bottom: 100%;
+    }
+    /*一点点修饰:一行 还有文字居中*/
+    
+    .box {
+        /*去掉空格*/
+        font-size: 0;
+    }
+    
+    .box .square:nth-of-type(2n) {
+        background-color: #f96;
+    }
+    
+    .box .square {
+        /*不想用浮动*/
+        display: inline-block;
+        /*横向居中*/
+        text-align: center;
+        /*上面font-size=0 覆盖其*/
+        font-size: 12px;
+    }
+    
+    .box .square:before {
+    		/*vm的规则是两个inline-block的元素  按照高度的中线居中*/
+        vertical-align: middle;
+        width: .001em;
+    }
+
+    .box .square-txt {
+    		/*这是我们想要居中的文字*/
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    /*VW*/
+    .box2 .square{
+    	width: 45vw;
+    	height: 45vw;
+    	background-color: #69f;
+    }
+    /*同样的一点修饰:一行 居中 用不同上面的方法实现*/
+		.box2{
+			display: flex;
+		}
+		.box2 .square:nth-of-type(2n) {
+		    background-color: #96f;
+		}
+		.box2 .square{
+			display: flex;
+		}
+		.box2 .square-txt{
+			margin:auto;
+		}
+		/*然后说说:优缺点
+		*	1．width:45%;这个宽度是有滚动条的时候去掉了滚动条的宽度,而width:45vw,因为vw是设备的宽度,自然也包括滚动条的宽度,这样在pc端,有滚动条的情况下,其实这两的宽度不一致
+		*	2.移动端很多时候 判断屏幕宽度>750或者别的数字的时候,让body的宽度直接变成750,这样width:45%;相应的也会变小,但是vw不行
+		*	3.width:45%;,如果写内容的话,很多时候不太方便,因为padding-bottom:100%,多数时候用定位配合使用,但vw却不用,而且相对来说容易理解
+		*	综合:在不需要考虑兼容性,滚动条,最大宽度的时候可以用vw
+		*/
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="square"><span class="square-txt">1dfsafdsfa</span></div>
+        <div class="square"><span class="square-txt">2</span></div>
+    </div>
+
+
+    <div class="box2">
+        <div class="square"><span class="square-txt">1dfsafdsfa</span></div>
+        <div class="square"><span class="square-txt">2</span></div>
+    </div>
+</body>
+
+</html>
