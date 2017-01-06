@@ -31,6 +31,7 @@
       this.init();
     }
     RadioGroupThatHasText.prototype = {
+      constructor: RadioGroupThatHasText,
       setText:function (radio) {
         // checked radio shows text.
         var text = radio.closest(this.radioItemSelectorName).find(":text");

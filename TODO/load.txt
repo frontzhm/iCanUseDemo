@@ -1,0 +1,58 @@
+function InfiniteLoad(page, last_page, requestData) {
+  this.page = page;
+  this.last_page = last_page;
+  // this.canLoad = true;
+  this.requestData = requestData;
+  this.init();
+}
+InfiniteLoad.prototype = {
+  constructor: InfiniteLoad,
+  getNextPage: function getNextPage() {
+    if (!canLoad) {
+      return;
+    }
+    canLoad = false;
+    this.page++;
+    console.log(this.page + "pageff")
+    console.log(this.last_page + "last_pageff")
+    console.log(this.page > this.last_page)
+    if (this.page > this.last_page) {
+      $(window).off("scroll", "scrollLoad");
+      return;
+    }
+    requestData(this.page);
+  },
+  init: function() {
+    var _this = this;
+    $(window).scroll(function scrollLoad() {
+      var scrollTop = $(this).scrollTop();
+      var clientHeight = $(this).height();
+      var bodyHeight = $(document).height();
+      if (scrollTop + clientHeight + 50 >= bodyHeight) {
+        _this.getNextPage();
+      }
+    });
+  }
+
+}
+
+<script src="__JS__/infinite.js"></script>
+  <script>
+    var last_page = $("#page").data('last');
+    var page = parseInt($("#page").val());
+    var canLoad = true;
+    function requestData (page) {
+      $("#loadtip").html("正在努力加载...");
+      var type = "{$type}";
+      var url_ajax = "/user/logList/p/" + page + '/type/' + type;
+      $.get(url_ajax,
+        function(data) {
+          $("#logList").append(data);
+          canLoad = true;
+          if(load.page===load.last_page){
+            $("#loadtip").html("到底了...");
+          }
+      });
+    }
+    var load = new InfiniteLoad(page,last_page,requestData);
+  </script>
