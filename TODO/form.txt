@@ -1,0 +1,169 @@
+
+  <form id="uploadForm" action="" method="post">
+    <div class="uploadImg">
+      <div class="workUploadWrap mt10" data-label="人物形象">
+        <div id="imageUpload" class="uploadPluginBox disabled" log="上传人物形象"></div>
+        <p class="uploadWorkFileInfo pb10"> 请上传人物形象，图片大小在50K~10M(支持jpg/gif/png格式)</p>
+      </div>
+      <div class="workUploadWrap mt10" data-label="封面图">
+        <div id="coverUpload" class="uploadPluginBox disabled" log="上传封面图"></div>
+        <p class="uploadWorkFileInfo pb10"> 请上传封面图，尺寸是240*240(支持jpg/gif/png格式)</p>
+      </div>
+      <div class="workUploadWrap mt10" data-label="漫画作品">
+        <div id="comicUpload" class="uploadPluginBox disabled" log="上传漫画作品"></div>
+        <p class="uploadWorkFileInfo pb10"> 请上传漫画作品，图片大小在50K~10M(支持jpg/gif/png格式)</p>
+      </div>
+    </div>
+    <ul class="main">
+      <li class="name">
+        <label class="lable">作品名称<span>|</span></label>
+        <input name="title" type="text" minlength="3" maxlength="16" placeholder="请输入3-16个字符" class="inp required" data-tip="作品名称的字数在3-16之间" data-reg=".{3,16}" data-label="作品名称">
+      </li>
+      <input type="hidden" name="cate_id" value="18">
+      <li>
+        <p class="lable">故事梗概<span>|</span></p>
+        <textarea data-label="故事梗概" maxlength="300" id="genggai" minlength="10" class="textarea required" name="" placeholder="请输入10-300个字符" data-tip="故事梗概的字数在10-300之间" data-reg=".{10,300}" data-label="故事梗概"></textarea>
+      </li>
+      <li>
+        <p class="lable">故事脚本<span>|</span></p>
+        <textarea maxlength="10000" minlength="50" class="textarea required" name="" placeholder="请输入50-10000个字符" data-tip="故事脚本的字数在50-10000之间" data-reg=".{50,10000}" data-label="故事脚本"></textarea>
+      </li>
+      <li>
+        <p class="lable">编绘注明<span>|</span></p>
+        <textarea id="bianhui" maxlength="1000" minlength="1" class="textarea required" name="" placeholder="请输入1-1000个字符" data-tip="编绘注明的字数在1-1000之间" data-reg=".{1,1000}" data-label="编绘注明"></textarea>
+      </li>
+      <li class="btnLi">
+        <a id="submitBtn" href="javascript:;">提交</a>
+      </li>
+    </ul>
+    <input type="hidden" name="theme_id" value="2">
+    <input type="hidden" name="activity_id" value="3">
+    <input type="hidden" name="step" value="3">
+  </form>
+  <script>
+  // 上传人物形象
+  $('#imageUpload').ossUpload({
+    //文件最小限制,单位b,不要写单位,默认0,51200==50K
+    min_size: 51200,
+    image_type: "jpg,gif,png",
+    //是否可以在文件浏览对话框中选择多个文件,默认false 否
+    multi_selection: true,
+    autoUpload: true,
+    button_name: "上传人物形象",
+    input_name: "",
+    //上传成功的回调函数,info为文件信息
+    success: function(info) {}
+
+  });
+  // 上传封面图
+  $('#coverUpload').ossUpload({
+    image_type: "jpg,gif,png",
+    //可以上传的文件数量,默认50个
+    file_number: 1,
+    autoUpload: true,
+    button_name: "上传封面图",
+    input_name: "",
+    //上传成功的回调函数,info为文件信息
+    success: function(info) {
+      if (info.width !== "240" || info.height !== "240") {
+        layerMsg("封面图尺寸必须是240*240");
+        $("#coverUpload .ossUploadItem").first().find(" .ossUploadItemHandle").click();
+        return false;
+      }
+    }
+  });
+  // 上传漫画作品
+  $('#comicUpload').ossUpload({
+    //文件最小限制,单位b,不要写单位,默认0,51200==50K
+    min_size: 51200,
+    image_type: "jpg,gif,png",
+    //是否可以在文件浏览对话框中选择多个文件,默认false 否
+    multi_selection: true,
+    autoUpload: true,
+    button_name: "上传漫画作品",
+    input_name: "",
+    //上传成功的回调函数,info为文件信息
+    success: function(info) {}
+  });
+  // 检测
+  $(function() {
+  	// 点击提交
+  	$("#submitBtn").click(function () {
+  		if(!allImageIsRight()){
+  			return false;
+  		}
+  		if(!allInputIsRight()){
+  			return false;
+  		}
+  		// 可以提交了,为了测试,加了这行
+  		return false;
+  		$(this).submit();
+  	})
+    // 检测容器有没有.ossUploadItem,从而判断有没有上传图片
+    function eleHasPic(ele) {
+      return ele.find(".ossUploadItem").length > 0;
+    }
+    // 检测图片上传进度是否完成
+    function ImgIsFinished(ele) {
+      return ele.find(".progress").css("width") === ele.find(".progress-bar").css("width");
+    }
+    // 检测容器下图片是否都上传完
+    function eleAllImgFinished(ele) {
+      var res = true;
+      ele.find(".ossUploadItem").each(function() {
+        var self = $(this);
+        if (!ImgIsFinished(self)) {
+          res = false;
+          return false;
+        }
+      })
+      return res;
+    }
+    // 是否是空值
+    function isEmpty (ele) {
+    	return /^ *$/.test(ele.val());
+    }
+    // 检测所有文本框是否为空,并且长度是否正确,并弹出相应信息
+    function allInputIsRight () {
+    	var res = true;
+    	$(".required").each(function(index, el) {
+    		var self = $(this);
+    		if(isEmpty (self)){
+    			layerMsg(self.data("label")+"不能为空");
+    			self.focus();
+    			res = false;
+    			return false;
+    		}
+    		var reg = new RegExp(self.data("reg"));
+    		if(!reg.test(self.val())){
+    			layerMsg(self.data("tip"));
+    			self.focus();
+    			res = false;
+    			return false;
+    		}
+    	});
+    	return res;
+    }
+    // 检测所有图片是否为空,且上传进度完全,并弹出相应信息
+    function allImageIsRight (argument) {
+    	var res = true;
+    	$(".workUploadWrap").each(function(index, el) {
+    		var self = $(this);
+    		if(!eleHasPic(self)){
+    			layerMsg(self.data("label")+"还没有上传图片哟");
+    			res = false;
+    			return false;
+    		}
+    		if(!eleAllImgFinished(self)){
+    			layerMsg(self.data("label")+"的图片正在上传哟,请稍等~");
+    			res = false;
+    			return false;
+    		}
+    	});
+    	return res;
+    }
+
+
+  })
+  </script>
+
