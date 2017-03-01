@@ -167,5 +167,5 @@
   	  }
 
   	}
-  	window.Banner = Banner  
+  	window.Banner = Banner;
   }()

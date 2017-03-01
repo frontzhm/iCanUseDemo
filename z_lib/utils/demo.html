@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+  }
+  
+  body {
+    background-color: #f69;
+  }
+  
+  #outer,
+  #inner,
+  #center {
+    padding: 50px;
+    margin: 20px;
+    border: 1px solid #000;
+    position: relative;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="outer" class="c">
+    <div id="inner1" class="c"></div>
+    <div id="inner2"></div>
+    <div id="inner" class="a b c d e f">
+      <div id="center"></div>
+    </div>
+    <div id="inner3"></div>
+    <div id="inner4"></div>
+    <div id="inner5"></div>
+  </div>
+  <script src="utils.js"></script>
+  <script>
+  console.log(utils)
+  console.log(utils.isModernBrowser)
+  utils.css(document.body, {
+    backgroundColor: "#eee"
+  })
+  console.log(utils.offset(center))
+  console.log(utils.win("clientWidth"))
+  utils.win("scrollTop", 0) // ??
+    // document.body.scrollTop = 0;
+    // document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 8
+  console.log(utils.children(outer))
+  console.log(utils.firstChild(outer))
+  console.log(utils.lastChild(outer))
+  console.log(utils.prev(inner))
+  console.log(utils.next(inner))
+  console.log(utils.prevAll(inner))
+  console.log(utils.nextAll(inner))
+  console.log(utils.sibling(inner))
+  console.log(utils.siblings(inner))
+  console.log(utils.index(inner))
+  console.log(utils.append(inner5, inner))
+  console.log(utils.prepend(inner3, inner))
+  console.log(utils.insertBefore(inner3, inner))
+  console.log(utils.insertAfter(inner5, inner))
+  console.log(utils.insertAfter(inner5, inner))
+  console.log(utils.hasClass(inner, "e"))
+  console.log(utils.hasClass(inner, "ee"))
+  console.log(utils.addClass(inner, " gg e "))
+  console.log(utils.removeClass(inner, " gg e o a b"))
+  console.log(utils.getElementsByClassName("c"))
+  console.log(utils.getElementsByClassName("c", outer))
+  console.log(utils.css(inner, {
+    float: "left",
+    opacity:0.9
+  }));
+  console.log(utils.css(inner,"width"))
+  console.log(utils.css(inner,"opacity"))
+  console.log(utils.css(inner,"width","500","%"))
+  </script>
+</body>
+
+</html>
