@@ -1,0 +1,98 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+
+.banner {
+  margin: 50px auto;
+  width: 300px;
+  height: 200px;
+  position: relative;
+}
+
+.slidelist {
+  height: inherit;
+  background: #ccc url(img/load1.gif) no-repeat center center;
+}
+
+.slidelist>li,
+.slidelist>li>a,
+.slidelist>li img {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+
+.slidelist>li {
+  position: absolute;
+  z-index: 0;
+  /*开始是隐藏状态*/
+  opacity: 0;
+  filter: alpha(opacity=0);
+  /*动画到opacity1*/
+}
+
+.slidelist>li.cur {
+  z-index: 1;
+}
+
+.slidelist>li img {
+  display: none;
+}
+/*小索引*/
+
+.tiplist {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  font-size: 0;
+  z-index: 2;
+}
+
+.tiplist>li {
+  display: inline-block;
+  cursor: pointer;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #fff;
+  -webkit-box-shadow: 1px 1px 2px #999;
+  box-shadow: 1px 1px 2px #999;
+  margin-left: 10px;
+}
+
+.tiplist>li.cur {
+  background-color: #c99;
+}
+/*左右箭头*/
+
+.arrleft,
+.arrright {
+  position: absolute;
+  top: 50%;
+  margin-top: -35px;
+  width: 40px;
+  height: 70px;
+  background-image: url(img/arr.png);
+  opacity: .5;
+  filter: alpha(opacity=50);
+  display: none;
+  z-index: 2;
+}
+
+.arrleft:hover,
+.arrright:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+
+.arrright {
+  right: 0;
+  background-position: -41px 0;
+}

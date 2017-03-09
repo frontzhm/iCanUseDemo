@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+	#box{
+	width: 100px;
+	height: 100px;
+	background-color: #f69;	
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+</style>
+</head>
+<body>
+	<div id="box"></div>
+	<script src="../utils/utils.js"></script>
+	<script src="animate.js"></script>
+	<script>
+	var box = document.getElementById("box");
+		animate(box,{left:"500",top:"200",height:"200"},100,"linear",function(){
+			box.style.backgroundColor = "#69f";
+		})
+	</script>
+</body>
+</html>

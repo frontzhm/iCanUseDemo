@@ -7,6 +7,7 @@
 return{
 	isModernBrowser,
 	z_typeof,
+	browser,
 	// dom操作
 	offset,
 	win,

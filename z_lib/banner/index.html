@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet" href="banner.css">
+</head>
+
+<body>
+  <div class="box">
+    <div class="banner" id="banner">
+      <!-- 轮播图的幻灯片 -->
+      <ul class="slidelist">
+      </ul>
+      <!-- 小索引 -->
+      <ol class="tiplist">
+      </ol>
+      <!-- 左右箭头 -->
+      <a href="javascript:;" class="arrleft"></a>
+      <a href="javascript:;" class="arrright"></a>
+    </div>
+  </div>
+  <script src="../utils/utils.js"></script>
+  <script src="banner.js"></script>
+  <script src="../animate/animate.js"></script>
+  <script>
+  var data = [{
+    "img": "img/01.jpg",
+    "desc": "2016新世界",
+    "url": "http://www.baidu.com"
+  }, {
+    "img": "img/02.jpg",
+    "desc": "2016新世界",
+    "url": "http://www.baidu.com"
+  }, {
+    "img": "img/03.jpg",
+    "desc": "2016新世界",
+    "url": "http://www.baidu.com"
+  }, {
+    "img": "img/04.jpg",
+    "desc": "2016新世界",
+    "url": "http://www.baidu.com"
+  }]
+  var banner = new Banner(document.getElementById("banner"),data,3000)
+  </script>
+  <!-- <script>
+  var banner = document.getElementById("banner");
+  // 0
+  var slidelist = utils.getElementsByClassName("slidelist", banner)[0];
+  var tiplist = utils.getElementsByClassName("tiplist", banner)[0];
+  var arrleft = utils.getElementsByClassName("arrleft", banner)[0];
+  var arrright = utils.getElementsByClassName("arrright", banner)[0];
+  var slides = slidelist.getElementsByTagName("li");
+  var imgs = slidelist.getElementsByTagName("img");
+  var tips = tiplist.getElementsByTagName("li");
+  var jsonData = null;
+  var len = 0;
+  var curIndex = 0;
+  var delay = 2000;
+  // 1.获取数据
+  ~ function() {
+    // var xml = new XMLHTTPRequest;
+    // xml.open("get","data.txt?_="+Math.random(),false);
+    // xml.onreadystatechange = function () {
+    //   if(xml.readyState===4&&/^2\d{2}$/.test(xml.status)){
+    //    jsonData = formatJSON(xml.responseText);
+    //   } 
+    // }
+    // xml.send(null);
+    jsonData = [{
+      "img": "img/01.jpg",
+      "desc": "2016新世界",
+      "url": "http://www.baidu.com"
+    }, {
+      "img": "img/02.jpg",
+      "desc": "2016新世界",
+      "url": "http://www.baidu.com"
+    }, {
+      "img": "img/03.jpg",
+      "desc": "2016新世界",
+      "url": "http://www.baidu.com"
+    }, {
+      "img": "img/04.jpg",
+      "desc": "2016新世界",
+      "url": "http://www.baidu.com"
+    }];
+    len = jsonData.length;
+  }()
+  // 2.绑定数据
+  ~ function() {
+    var str = "",
+      str1 = "",
+      className = "";
+    for (var i = 0; i < len; i++) {
+      var cur = jsonData[i];
+      className = i === 0 ? ' class="cur"' : "";
+      str += '<li' + className + '><a href="' + cur.url + '"><img trueImg="' + cur.img + '" src="" alt="' + cur.desc + '" title="' + cur.desc + '"></a></li>';
+      str1 += '<li' + className + '></li>';
+    }
+    slidelist.innerHTML = str;
+    tiplist.innerHTML = str1;
+  }()
+  // 3.懒加载
+  var lazyTimer = window.setTimeout(lazyImg, 500);
+  // 首张图片需要动画,其他的都是把img的路径绑定上去
+  function lazyImg() {
+    for (var i = 0; i < len; i++) {
+      ~ function(i) {
+        var cur = imgs[i];
+        var oImg = new Image;
+        oImg.src = cur.getAttribute("trueImg");
+        oImg.onload = function() {
+          cur.src = this.src;
+          cur.style.display = "block";
+          oImg = null;
+        }
+      }(i)
+    }
+    animate(slides[0], {
+      opacity: 1
+    }, 300)
+    clearTimeout(lazyTimer)
+  }
+  // 4.播放到哪一张
+  // 淡入淡出逻辑:播放到哪张,哪张的zindex 1,其他的都是 zindex 0,然后哪张的opacity动画变到1,然后其他的都变成0
+  // 小索引的类名跟着变化,当前的加类名 否则删类名
+  function playWhich(n) {
+    // n是正数,curIndex<len,n=len的时候相当于第一张也就是0...
+    // n是负数,n=-1的时候是最后一张,也就是len-1
+    curIndex = (n + len) % len;
+    for (var i = 0; i < len; i++) {
+      if (i === curIndex) {
+        utils.addClass(slides[i], "cur")
+      } else {
+        utils.removeClass(slides[i], "cur")
+      }
+    }
+    // 小索引
+    for (i = 0; i < len; i++) {
+      if (i === curIndex) {
+        utils.addClass(tips[i], "cur")
+      } else {
+        utils.removeClass(tips[i], "cur")
+      }
+    }
+    animate(slides[curIndex], {
+      opacity: 1
+    }, 300, function() {
+      for (var i = 0; i < len; i++) {
+        if (i !== curIndex) {
+          utils.css(slides[i], "opacity", 0)
+        }
+      }
+    })
+  }
+  
+  function playNext() {
+    playWhich(++curIndex)
+  }
+  
+  function playPrev() {
+    playWhich(--curIndex)
+  }
+  
+  // 5.自动轮播,相当于curIndex隔一段时间+1
+  var autoPlayTimer = window.setInterval(function() {
+      playNext();
+    }, delay)
+    // 6.停止和播放轮播
+  function pause() {
+    clearInterval(autoPlayTimer)
+  }
+  
+  function play() {
+    autoPlayTimer = window.setInterval(function() {
+      playNext();
+    }, delay)
+  }
+  // 6.鼠标放在banner图上
+  banner.onmouseover = function() {
+    pause();
+    arrleft.style.display = arrright.style.display = "block";
+  }
+  banner.onmouseout = function() {
+      play();
+      arrleft.style.display = arrright.style.display = "none";
+    }
+    // 7.点击箭头
+  arrright.onclick = playNext;
+  arrleft.onclick = playPrev;
+  </script> -->
+</body>
+
+</html>

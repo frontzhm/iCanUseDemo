@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <div class="radio-group">
+    <label for="red">给红包么</label>
+    <div class="radio-item">
+      <input type="radio" name="red" id="a"><label for="a">给</label>
+      <input type="text" placeholder="说个数">
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="red" checked id="b"><label for="b">不给</label>
+      <input type="text" placeholder="为啥">
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="red" id="c"><label for="c">态度暧昧</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" name="red" id="d"><label for="d">凑数</label>
+    </div>
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/2.2.4/jquery.js"></script>
+  <script>
+    // 选中相应的项 显示文本
+    function RadioGroupThatHasText(radioGroupSelector,radioItemSelectorName){
+      this.group = radioGroupSelector;
+      this.radioItemSelectorName = radioItemSelectorName;
+      this.init();
+    }
+    RadioGroupThatHasText.prototype = {
+      constructor: RadioGroupThatHasText,
+      setText:function (radio) {
+        // checked radio shows text.
+        var text = radio.closest(this.radioItemSelectorName).find(":text");
+        if(text.length!==0){
+          if(radio.prop("checked")){
+            text.css({display:"inline-block"});
+          }else{
+            text.css({display:"none"});
+          }
+        }
+      },
+
+      init:function () {
+        var _this = this;
+        // 这里的:radio :text 是需要的选择器,根据需求修改
+        this.radios = $(":radio",this.group);
+        this.texts = $(":text",this.group);
+        this.radios.each(function () {
+          _this.setText($(this));
+        });
+        this.radios.change(function(){
+          _this.texts.css("display","none");
+          _this.setText($(this));
+        });
+      }
+    };
+
+    $(".radio-group").each(function () {
+      console.log(new RadioGroupThatHasText($(this),".radio-item"));
+      // new RadioGroupThatHasText($(this));
+    })
+  </script>
+
+</body>
+</html>

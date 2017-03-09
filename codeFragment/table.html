@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>表格排序</title>
+  <style>
+  * {
+    padding: 0;
+    margin: 0;
+    -webkit-user-select: none;
+    font-family: "Microsoft Yahei";
+    font-size: 14px;
+  }
+  
+  .box {
+    width: 400px;
+    margin: 50px auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px 1px #ccc;
+  }
+  
+  .box th {
+    background-color: #f8f8f8;
+  }
+  
+  .box th,
+  .box td {
+    width: 100px;
+    text-align: center;
+    line-height: 40px;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <table id="ztable">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th class="$needOrder">年龄</th>
+          <th class="$needOrder">武力值</th>
+          <th>性别</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+  <script src="../z_lib/utils/utils.js"></script>
+  <script>
+  var data = [{
+    "name": "柯南",
+    "age": 24,
+    "wuli": 56,
+    "gender": "1"
+  }, {
+    "name": "小南",
+    "age": 22,
+    "wuli": 16,
+    "gender": "0"
+  }, {
+    "name": "卡卡西",
+    "age": 74,
+    "wuli": 96,
+    "gender": "1"
+  }, {
+    "name": "月亮女神",
+    "age": 1000,
+    "wuli": 86,
+    "gender": "0"
+  }];
+  // 1.元素选择
+  var oTable = document.getElementById("ztable"),
+    oThead = oTable.tHead,
+    oThs = oThead.rows[0].cells,
+    oTbody = oTable.tBodies[0];
+  function bindData() {
+    var html = "";
+    for (var i = 0, l = data.length; i < l; i++) {
+      var cur = data[i],
+        gender = cur.gender === "1" ? "男" : "女";
+      var cellTr = '<tr><td>' + cur.name + '</td><td>' + cur.age + '</td><td>' + cur.wuli + '</td><td>' + gender + '</td></tr>';
+      html += cellTr;
+    }
+    oTbody.innerHTML = html;
+  }
+  bindData();
+  </script>
+</body>
+
+</html>

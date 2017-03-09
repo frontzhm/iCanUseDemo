@@ -1,0 +1,48 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "microsoft yahei";
+  }
+  
+  ul {
+    list-style: none;
+  }
+  /*必要css*/
+  
+  .tab-hd>li {
+    display: inline-block;
+  }
+  
+  .tab-hd>li.cur {
+    /*根据需求*/
+    border-bottom: 2px solid #f50;
+  }
+  
+  .tab-bd>li {
+    display: none;
+  }
+  
+  .tab-bd>li.cur {
+    display: block;
+  }
+  /*修饰*/
+  
+  .tab-hd>li {
+    width: 100px;
+    text-align: center;
+    line-height: 30px;
+    border-bottom: 2px solid #fff;
+    cursor: pointer;
+  }
+  
+  .tab-bd>li {
+    height: 150px;
+    padding: 20px;
+  }
+  
+  .tab {
+    width: 500px;
+    margin: 50px auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+  }

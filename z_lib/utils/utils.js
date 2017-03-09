@@ -2,7 +2,7 @@ var utils = (function() {
 
   var isModernBrowser = "getComputedStyle" in window;
 
-  // IE 6-8的兼容性
+  /** IE 6-8的兼容性*/
   if (!isModernBrowser) {
     function indexOf(item) {
       for (var i = 0; i < this.length; i++) {
@@ -52,6 +52,29 @@ var utils = (function() {
       return eval("(" + str + ")");
     }
   }
+  /* 兼容性结束*/
+
+  /*检测当前浏览器的终端*/
+  var browser = (function() {
+    var
+      u = navigator.userAgent,
+      app = navigator.appVersion;
+     return {
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+        iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+        iPad: u.indexOf('iPad') > -1, //是否iPad
+        webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+        qq: u.match(/\sQQ/i) == " qq" //是否QQ
+      };
+  })();
+  /*检测当前浏览器的终端*/
 
   // 检测类型
   function z_typeof(para) {
@@ -64,9 +87,6 @@ var utils = (function() {
     return Object.prototype.toString.call(para).slice(8, -1).toLowerCase();
   }
 
-  /*
-    数组相关的方法
-   */
   // 数组去重
   function z_unique() {
     var obj = {};
@@ -83,9 +103,9 @@ var utils = (function() {
     return this;
   }
   Array.prototype.z_unique = z_unique;
-  /*
-    dom相关的
-   */
+
+
+  /*dom相关的*/
   // 元素和body的offset
   function offset(ele) {
     var
@@ -381,6 +401,7 @@ var utils = (function() {
   return {
     isModernBrowser: isModernBrowser,
     z_typeof: z_typeof,
+    browser: browser,
     // 以下是dom的操作
     offset: offset,
     win: win,
