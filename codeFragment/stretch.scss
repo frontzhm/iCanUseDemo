@@ -1,6 +1,6 @@
   
   @mixin stretch($offset-top:0,$offset-bottom:0,$offset-left:0,$offset-right:0){
-    positon:absolute;
+    position:absolute;
     @if $offset-top{top:$offset-top;}
 	  @if $offset-bottom{bottom:$offset-bottom;}
 	  @if $offset-left{left:$offset-left;}
