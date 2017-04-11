@@ -1,0 +1,32 @@
+  
+  @mixin stretch($offset-top:0,$offset-bottom:0,$offset-left:0,$offset-right:0){
+    positon:absolute;
+    @if $offset-top{top:$offset-top;}
+	  @if $offset-bottom{bottom:$offset-bottom;}
+	  @if $offset-left{left:$offset-left;}
+	  @if $offset-right{right:$offset-right;}
+    
+  }
+  @mixin stretch-x($offset-left:0,$offset-right:0){
+    @include stretch(false,false,$offset-left,$offset-right);
+  }
+  @mixin stretch-y($offset-top:0,$offset-bottom:0){
+    @include stretch($offset-top,$offset-bottom,false,false);
+  }
+  /*
+  demo:
+  .x{
+    @include stretch-x;
+  }
+  .all{
+    @include stretch;
+  }
+  
+  .someone{
+    @include stretch(0,1,2,1);
+  }
+  
+  .someone2{
+    @include stretch($offset-left:3px);
+  }
+  */
