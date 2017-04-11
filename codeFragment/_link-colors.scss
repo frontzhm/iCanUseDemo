@@ -1,0 +1,30 @@
+// havf
+@mixin link-colors($normal,$hover:false,$active:false,$visited:false,$focus:false){
+  color:$normal;
+  @if $hover {
+    &:hover{
+      color:$hover;
+    }
+  }
+  @if $active {
+    &:active{
+      color:$active;
+    }
+  }
+  @if $visited {
+    &:visited{
+      color:$visited;
+    }
+  }
+  @if $focus {
+    &:focus{
+      color:$focus;
+    }
+  }
+}
+
+/*demo
+.link{
+  @include link-colors(#333,#444)
+}
+*/
