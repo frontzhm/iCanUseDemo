@@ -1,0 +1,60 @@
+@import "../helpers/utils";
+$rank-border-color:#ccc;
+$rank-item-height:0.2rem;
+.rank-hd {
+  @include sub-title();
+}
+
+.rank-bd {
+  border: 1px solid $rank-border-color;
+  border-radius: 4px;
+  padding: 10px;
+  @include margin-x();
+}
+
+.rank-item {
+  margin-bottom: 10px;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  line-height: $rank-item-height;
+  &:nth-last-of-type(1) {
+    margin-bottom: 0;
+  }
+}
+
+.rank-item-main {
+  display: -webkit-flex;
+  display: flex;
+}
+
+.rank-item-main-text {
+  margin-left: 5px;
+  @include ellipsis(8em);
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.rank-item-number {
+  @include circle-text(0.2rem);
+  font-size: 0.14rem;
+  color: #333;
+}
+
+.rank-item-memo {
+  font-size: 90%;
+  color: #555;
+}
+
+.rank-item-avatar {
+  @include avatar();
+  margin-left: 5px;
+}
+
+.rank-more {
+  margin-top: 10px;
+  text-align: center;
+  a {
+    color: #999;
+  }
+}

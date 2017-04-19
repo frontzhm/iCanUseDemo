@@ -1,0 +1,15 @@
+@import "../helpers/utils";
+.page-header {
+  height: 0.4rem;
+  background-color: #f4f4f4;
+  h1,
+  h2,
+  h3,
+  h4 {
+    line-height: 0.4rem;
+    text-align: center;
+    font-weight: bold;
+    font-size:0.16rem;
+
+  }
+}

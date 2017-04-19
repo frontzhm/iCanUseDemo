@@ -1,0 +1,15 @@
+@import "../components/header";
+@import "../components/rank";
+@import "../components/tab";
+.rank-sites-detail-list{
+
+	.rank-bd{
+		padding: 0;
+		border: 0;
+	}
+	.rank-item-main-text{
+		text-decoration: underline;
+		width: 14em;
+	}
+}
+@include back-index-btn;

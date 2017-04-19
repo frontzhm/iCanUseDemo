@@ -1,0 +1,127 @@
+/* line 4, src/sass/components/_rank.scss */
+.rank-hd {
+  font-size: 0.16rem;
+  font-weight: bold;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+/* line 8, src/sass/components/_rank.scss */
+.rank-bd {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+
+/* line 15, src/sass/components/_rank.scss */
+.rank-item {
+  margin-bottom: 10px;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-between;
+  line-height: 0.2rem;
+}
+
+/* line 21, src/sass/components/_rank.scss */
+.rank-item:nth-last-of-type(1) {
+  margin-bottom: 0;
+}
+
+/* line 26, src/sass/components/_rank.scss */
+.rank-item-main {
+  display: -webkit-flex;
+  display: flex;
+}
+
+/* line 31, src/sass/components/_rank.scss */
+.rank-item-main-text {
+  margin-left: 5px;
+  width: 8em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* line 38, src/sass/components/_rank.scss */
+.rank-item-number {
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 0.2rem;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  line-height: 0.2rem;
+  border: 1px solid #999;
+  font-size: 0.14rem;
+  color: #333;
+}
+
+/* line 44, src/sass/components/_rank.scss */
+.rank-item-memo {
+  font-size: 90%;
+  color: #555;
+}
+
+/* line 49, src/sass/components/_rank.scss */
+.rank-item-avatar {
+  width: 0.2rem;
+  height: 0.2rem;
+  border-radius: 0.2rem;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+  margin-left: 5px;
+}
+
+/* line 37, src/sass/helpers/_mixins.scss */
+.rank-item-avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 54, src/sass/components/_rank.scss */
+.rank-more {
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* line 57, src/sass/components/_rank.scss */
+.rank-more a {
+  color: #999;
+}
+
+/* line 4, src/sass/pages/index.scss */
+.rank-sites .rank-item-main-text {
+  width: 16em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* line 9, src/sass/pages/index.scss */
+.atv-rule {
+  color: #666;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  line-height: 0.2rem;
+}
+
+/* line 16, src/sass/pages/index.scss */
+.atv-rule-hd {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* line 20, src/sass/pages/index.scss */
+.atv-rule-memo {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

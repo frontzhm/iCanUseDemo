@@ -1,0 +1,34 @@
+@import "../helpers/utils";
+.tab-hd-list {
+  display: flex;
+  display: -webkit-flex;
+  border: 1px solid #ccc;
+  border-radius:4px 4px 0 0;
+}
+
+.tab-hd-item {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  a {
+    display: block;
+    text-align: center;
+    height: 0.30rem;
+    line-height: 0.30rem;
+  }
+  &:nth-last-of-type(1) {
+    border-right: 0;
+  }
+}
+
+.tab-hd-item-cur {
+  background-color: #eee;
+}
+.tab-bd-list{
+  border: 1px solid #ccc;
+  border-top:0;
+  border-radius: 0 0 4px 4px;
+  padding: 10px;
+}
+.tab-bd-item{
+  display: none;
+}

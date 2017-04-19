@@ -1,0 +1,54 @@
+doctype html
+html
+	-var imgPath = "../img/"
+	-var cssPath = "../css/"
+	-var indexPath = "../"
+	-var libPath = "../lib/"
+	head
+		title 电亮中国-第四季
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+		link(rel="stylesheet" href=cssPath+"global.css")
+		link(rel="stylesheet" href=cssPath+"sites.css")
+	body
+		header.page-header
+			h1 电亮中国-第四季
+		section.rank.rank-sites-detail-list
+			h2.rank-hd 最受欢迎站点
+			div.rank-bd
+				.tab
+					ul.tab-hd-list
+						each address,i in ["全国","北京","上海","广州","深圳"]
+							li.tab-hd-item(class = i==0?"tab-hd-item-cur":"")
+								a(href="javascript:;") #{address}
+					ol.tab-bd-list
+						each k in ["全国","北京","上海","广州","深圳"]
+							li.tab-bd-item
+								ol.rank-list
+									each site,i in ["特来电-世家大厦","特来电-世家大厦家大厦","特来电-世家大厦世家大厦世家大厦","特来电-世家大厦","特来电-世家大厦家大厦","特来电-世家大厦世家大厦世家大厦","特来电-世家大厦","特来电-世家大厦家大厦","特来电-世家大厦世家大厦世家大厦","特来电-世家大厦"]
+										li.rank-item
+											div.rank-item-main
+												span.rank-item-number #{i+1}
+												a.rank-item-main-link(href="javascript:;")
+													span.rank-item-main-text #{site}
+											span.rank-item-memo 4.7
+		section.btn-block-box
+			a.btn-block(href=indexPath+"index.html") 返回活动首页
+		script(src=libPath+"jquery-2.0.3.js")
+		script.
+			// tab
+			(function(){
+				var tab = $(".tab");
+				tab.each(function(){
+					var self = $(this);
+					var hdItems = self.find(".tab-hd-item");
+					var bdItems = self.find(".tab-bd-item");
+					var defaultIndex = hdItems.filter(".tab-hd-item-cur").index();
+					bdItems.eq(defaultIndex).css("display","block");
+					hdItems.click(function(){
+						var self = $(this);
+						self.addClass("tab-hd-item-cur").siblings().removeClass("tab-hd-item-cur");
+						bdItems.css("display","none").eq(self.index()).css("display","block");
+					})
+				})
+			})();

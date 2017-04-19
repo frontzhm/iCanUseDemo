@@ -1,0 +1,22 @@
+@import "../components/rank";
+// rank-sites 
+.rank-sites {
+  .rank-item-main-text {
+    @include ellipsis(16em);
+  }
+}
+
+.atv-rule {
+  color: #666;
+  @include margin-y(30px);
+  @include padding-x();
+  line-height: 0.2rem;
+
+}
+.atv-rule-hd{
+	text-align: center;
+	margin-bottom: 10px;
+}
+.atv-rule-memo{
+	@include margin-y(10px);
+}
