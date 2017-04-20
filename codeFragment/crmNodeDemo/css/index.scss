@@ -1,0 +1,42 @@
+$mainColor:#080;
+.wrap {
+  font-size: 14px;
+  width: 800px;
+  margin: 50px auto;
+  border: 2px solid $mainColor;
+  padding: 30px;
+}
+table{
+	width: 100%;
+	text-align: center;
+	line-height: 34px;
+}
+thead{
+	background-color: $mainColor;
+	color:#fff;
+}
+tr:nth-of-type(2n){
+	background-color: #eee;
+}
+form>div{
+	line-height: 40px;
+	margin-top: 20px;
+}
+input[type="text"]{
+	width: 300px;
+	line-height: 30px;
+}
+.btn-box{
+	text-align: center;
+	margin-top: 50px;
+}
+button{
+	display: inline-block;
+	width: 100px;
+	line-height: 40px;
+	border: 0;
+	background-color: $mainColor;
+	color:#fff;
+	outline: none;
+
+}

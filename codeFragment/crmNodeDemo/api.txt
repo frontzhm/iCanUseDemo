@@ -1,0 +1,149 @@
+1.静态文件，路径即可
+
+2.列表
+
+简要描述：列表消息
+请求的url: /list
+请求方式：GET
+参数：
+
+参数名		必选 	类型	说明
+user_id		是		int		用户id
+
+返回示例:
+{
+	"status":1,
+	"message":"success",
+	"content":{
+		"data":[
+			{
+				"id"：1，
+				"gender":1,
+				"age":23,
+				"phone":"139874838",
+				"address":"fdafda"
+			},
+			...
+		]
+	}
+}
+
+返回参数说明:
+参数名 		类型	说明
+status		int		请求结果1成功，0失败
+message		string	说明信息
+content		object	返回的数据内容
+
+备注：无
+
+3.
+
+简要描述：某客户详情
+请求的url: /detail
+请求方式：GET
+参数：?id=1
+
+参数名		必选 	类型	说明
+id		    是		int		用户id
+
+返回示例:
+{
+	"status":1,
+	"message":"success",
+	"content":{
+				"id"：1，
+				"gender":1,
+				"age":23,
+				"phone":"139874838",
+				"address":"fdafda"
+	}
+}
+
+返回参数说明:
+参数名 		类型	说明
+status		int		请求结果1成功，0失败
+message		string	说明信息
+content		object	返回的数据内容
+
+备注：无
+
+4.
+简要描述：修改用户信息
+请求的url: /modify
+请求方式：POST
+参数：
+
+参数名		必选 	类型	说明
+id		    是		int		用户id
+gender		是		int		性别
+age		    是		int		年龄
+phone		是		int		手机号
+address		是		int		地址
+
+返回示例:
+{
+	"status":1,
+	"message":"success",
+}
+
+返回参数说明:
+参数名 		类型	说明
+status		int		请求结果1成功，0失败
+message		string	说明信息
+content		object	返回的数据内容
+
+备注：无
+
+5.
+简要描述：添加客户
+请求的url: /add
+请求方式：POST
+参数：
+
+参数名		必选 	类型	说明
+gender		是		int		性别
+age		    是		int		年龄
+phone		是		int		手机号
+address		是		int		地址
+
+返回示例:
+{
+	"status":1,
+	"message":"success",
+}
+
+返回参数说明:
+参数名 		类型	说明
+status		int		请求结果1成功，0失败
+message		string	说明信息
+content		object	返回的数据内容
+
+备注：无
+
+6.
+简要描述：删除客户
+请求的url: /del
+请求方式：GET
+参数：?id=xx
+
+
+返回示例:
+{
+	"status":1,
+	"message":"success",
+}
+
+返回参数说明:
+参数名 		类型	说明
+status		int		请求结果1成功，0失败
+message		string	说明信息
+content		object	返回的数据内容
+
+备注：无
+
+
+
+
+
+
+

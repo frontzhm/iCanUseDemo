@@ -1,0 +1,84 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title crm
+		link(rel="stylesheet", href="css/index.css")
+	body
+		.wrap
+			form
+				div
+					label.left-label(for="gender") 性别：
+					input(type="text" id="gender" name="gender")
+				div
+					label.left-label(for="age") 年龄：
+					input(type="text" id="age" name="age")
+				div
+					label.left-label(for="phone") 电话：
+					input(type="text" id="phone" name="phone")
+				div
+					label.left-label(for="address") 地址：
+					input(type="text" id="address" name="address")
+				div.btn-box
+					a#btn(href="javascript:;") 提交
+		script(src="js/ajax.js")
+		script.
+			var reg = /\?id=(\d+)/;
+			var isModify = reg.test(location.href);
+			var submit = document.getElementById("btn");
+			if(isModify){
+				var id = reg.exec(location.href)[1];
+				ajax({
+					url:"/detail?id="+id,
+					success:function(data){
+						if(data.code == 1){
+							data = data.content.data;
+							gender.value = data.gender;
+							age.value = data.age;
+							address.value = data.address;
+							phone.value = data.phone;
+						}
+					}
+				})
+
+			}
+			submit.onclick = function(){
+				 var data = {
+				 	gender:gender.value,
+				 	age:age.value,
+				 	address:address.value,
+				 	phone:phone.value,
+				 };
+				 if(isModify){
+				 	data.id = id;
+					 ajax({
+					 	type:"post",
+					 	url:"/modify",
+					 	data:JSON.stringify(data),
+					 	success:function(data){
+					 		console.log(data);
+					 		alert("修改成功");
+					 		location.href="index.html"
+					 	}
+					 });
+					 return;
+				 }
+				 ajax({
+				 	type:"post",
+				 	url:"/add",
+				 	data:JSON.stringify(data),
+				 	success:function(data){
+				 		console.log(data);
+				 		alert("添加成功");
+				 		location.href="index.html"
+				 	}
+				 });
+				 
+
+			}
+
+
+
+
+
+

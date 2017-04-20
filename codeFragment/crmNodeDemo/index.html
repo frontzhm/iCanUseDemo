@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>crm</title>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <p><a href="add.html">添加新客户</a></p>
+      <table>
+        <thead>
+          <th>编号</th>
+          <th>性别</th>
+          <th>年龄</th>
+          <th>电话</th>
+          <th>地址</th>
+          <th>操作</th>
+        </thead>
+        <tbody id="list">
+        </tbody>
+      </table>
+    </div>
+    <script src="js/ajax.js"></script>
+    <script>
+      var list = document.getElementById("list");
+      // 页面加载完，获取列表
+      ajax({
+      	url:"/list",
+      	success:function(data){
+      		if(data.code==0){
+      			return;
+      		}
+      		var str = "";
+      		data = data.content.data;
+      	  data.map(function(item){
+      	  	str+=
+      	  		`
+      	  			<tr>
+      	  			  <td>${item.id}</td>
+      	  			  <td>${item.gender}</td>
+      	  			  <td>${item.age}</td>
+      	  			  <td>${item.phone}</td>
+      	  			  <td>${item.address}</td>
+      	  			  <td> <a href="add.html?id=${item.id}">修改</a>&nbsp;<a href="javascript:;" class="del" thisId="${item.id}">删除</a></td>
+      	  			</tr>
+      	  		`
+      	  })
+      	  list.innerHTML = str;
+      	}
+      })
+      
+      list.addEventListener('click',function(e){
+      	var target = e.target;
+      	if(target.innerHTML === "删除" && target.tagName.toLowerCase() === "a" ){
+      		var thisId = target.getAttribute("thisId")
+      		var sureDel = confirm(`确定删除${thisId}为这个客户么?`);
+      		if(!sureDel){return;}
+      		ajax({
+      			url:'del?id='+target.getAttribute("thisId"),
+      			success:function(data){
+      				console.log(data)
+      				if(data.code == 0){
+      					alert('操作失败');
+      					return;
+      				}
+      				alert('操作成功');
+      				list.removeChild(target.parentNode.parentNode);
+      			}
+      		})
+      	}
+      },false);
+    </script>
+  </body>
+</html>

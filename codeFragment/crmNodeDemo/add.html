@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>crm</title>
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <div class="wrap">
+      <form>
+        <div>
+          <label for="gender" class="left-label">性别：</label>
+          <input type="text" id="gender" name="gender">
+        </div>
+        <div>
+          <label for="age" class="left-label">年龄：</label>
+          <input type="text" id="age" name="age">
+        </div>
+        <div>
+          <label for="phone" class="left-label">电话：</label>
+          <input type="text" id="phone" name="phone">
+        </div>
+        <div>
+          <label for="address" class="left-label">地址：</label>
+          <input type="text" id="address" name="address">
+        </div>
+        <div class="btn-box"><a id="btn" href="javascript:;">提交</a></div>
+      </form>
+    </div>
+    <script src="js/ajax.js"></script>
+    <script>
+      var reg = /\?id=(\d+)/;
+      var isModify = reg.test(location.href);
+      var submit = document.getElementById("btn");
+      if(isModify){
+      	var id = reg.exec(location.href)[1];
+      	ajax({
+      		url:"/detail?id="+id,
+      		success:function(data){
+      			if(data.code == 1){
+      				data = data.content.data;
+      				gender.value = data.gender;
+      				age.value = data.age;
+      				address.value = data.address;
+      				phone.value = data.phone;
+      			}
+      		}
+      	})
+      }
+      submit.onclick = function(){
+      	 var data = {
+      	 	gender:gender.value,
+      	 	age:age.value,
+      	 	address:address.value,
+      	 	phone:phone.value,
+      	 };
+      	 if(isModify){
+      	 	data.id = id;
+      		 ajax({
+      		 	type:"post",
+      		 	url:"/modify",
+      		 	data:JSON.stringify(data),
+      		 	success:function(data){
+      		 		console.log(data);
+      		 		alert("修改成功");
+      		 		location.href="index.html"
+      		 	}
+      		 });
+      		 return;
+      	 }
+      	 ajax({
+      	 	type:"post",
+      	 	url:"/add",
+      	 	data:JSON.stringify(data),
+      	 	success:function(data){
+      	 		console.log(data);
+      	 		alert("添加成功");
+      	 		location.href="index.html"
+      	 	}
+      	 });
+      }
+    </script>
+  </body>
+</html>

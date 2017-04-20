@@ -1,0 +1,87 @@
+doctype html
+html
+	head
+		meta(charset="utf-8")
+		title crm
+		link(rel="stylesheet", href="css/index.css")
+	body
+		.wrap
+			p
+				a(href="add.html") 添加新客户
+			table
+				thead
+						th 编号
+						th 性别
+						th 年龄
+						th 电话
+						th 地址
+						th 操作
+				tbody#list
+					//- each i in[1,2,3,4]
+					//- 	tr
+					//- 		td #{i}
+					//- 		td 女
+					//- 		td 24
+					//- 		td 189767562
+					//- 		td 德胜门外大街
+					//- 		td 
+					//- 			a(href="") 修改
+					//- 			&nbsp;
+					//- 			a(href="") 删除
+		script(src="js/ajax.js")
+		script.
+			var list = document.getElementById("list");
+			// 页面加载完，获取列表
+			ajax({
+				url:"/list",
+				success:function(data){
+					if(data.code==0){
+						return;
+					}
+					var str = "";
+					data = data.content.data;
+				  data.map(function(item){
+				  	str+=
+				  		`
+				  			<tr>
+				  			  <td>${item.id}</td>
+				  			  <td>${item.gender}</td>
+				  			  <td>${item.age}</td>
+				  			  <td>${item.phone}</td>
+				  			  <td>${item.address}</td>
+				  			  <td> <a href="add.html?id=${item.id}">修改</a>&nbsp;<a href="javascript:;" class="del" thisId="${item.id}">删除</a></td>
+				  			</tr>
+				  		`
+				  })
+				  list.innerHTML = str;
+				}
+			})
+			
+			list.addEventListener('click',function(e){
+				var target = e.target;
+				if(target.innerHTML === "删除" && target.tagName.toLowerCase() === "a" ){
+					var thisId = target.getAttribute("thisId")
+					var sureDel = confirm(`确定删除${thisId}为这个客户么?`);
+					if(!sureDel){return;}
+					ajax({
+						url:'del?id='+target.getAttribute("thisId"),
+						success:function(data){
+							console.log(data)
+							if(data.code == 0){
+								alert('操作失败');
+								return;
+							}
+							alert('操作成功');
+							list.removeChild(target.parentNode.parentNode);
+						}
+					})
+				}
+			},false)
+
+
+
+
+
+
+
+
