@@ -1,0 +1,9 @@
+.box {
+  background: darken($bg-shallow-blue, 10%);
+  background: -moz-linear-gradient(top, $bg-shallow-blue 0%, darken($bg-shallow-blue, 10%) 100%);
+  background: -webkit-gradient(left top, left bottom, color-stop(0%, $bg-shallow-blue), color-stop(100%, darken($bg-shallow-blue, 10%)));
+  background: -webkit-linear-gradient(top, $bg-shallow-blue 0%, darken($bg-shallow-blue, 10%) 100%);
+  background: -o-linear-gradient(top, $bg-shallow-blue 0%, darken($bg-shallow-blue, 10%) 100%);
+  background: -ms-linear-gradient(top, $bg-shallow-blue 0%, darken($bg-shallow-blue, 10%) 100%);
+  background: linear-gradient(to bottom, $bg-shallow-blue 0%, darken($bg-shallow-blue, 10%) 100%);
+}
