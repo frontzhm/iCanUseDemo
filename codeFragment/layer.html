@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  body {
+    height: 2000px;
+  }
+  
+  #mask {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    z-index: 5;
+    background-color: rgba(0, 0, 0, .4);
+  }
+  
+  .layer-dialog {
+    position: relative;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    background-color: #fff;
+    border-radius: 4px;
+  }
+  
+  .layer-content {
+    padding: 30px 20px;
+    text-align: center;
+  }
+  
+  .layer-btn-wrap {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+  
+  .layer-btn-wrap>button {
+    flex: 1;
+    text-align: center;
+  }
+  </style>
+</head>
+
+<body>
+  <button id="btn">
+    弹框
+  </button>
+  <div id="mask">
+    <div class="layer-dialog">
+      <div class="layer-content">
+        <div>
+          <img class="layer-icon" src="https://facebook.github.io/react/img/logo.svg" alt="" width="50">
+        </div>
+        <h3 class="layer-title">确定提现到微信吗？</h3>
+        <p class="layer-desc">50元将提现到您的微信零钱</p>
+      </div>
+      <div class="layer-btn-wrap">
+        <button class="layer-btn-yes">确定</button>
+        <button class="layer-btn-no">取消</button>
+      </div>
+    </div>
+  </div>
+  <script>
+  var layer = (function() {
+    var mask = document.getElementById('mask');
+
+    function showLayer() {
+      mask.style.display = 'block';
+      document.body.style.overflow = 'hidden'
+    }
+
+    function hideLayer() {
+      mask.style.display = 'none';
+      document.body.style.overflow = 'auto'
+    }
+    mask.addEventListener('click', function(e) {
+      e.target.id === 'mask' && hideLayer()
+    })
+
+    function pop(opts) {
+      var img = mask.getElementsByClassName('layer-icon')[0];
+      var title = mask.getElementsByClassName('layer-title')[0];
+      var desc = mask.getElementsByClassName('layer-desc')[0];
+      var yes = mask.getElementsByClassName('layer-btn-yes')[0];
+      var no = mask.getElementsByClassName('layer-btn-no')[0];
+      img.src = opts.img;
+      title.innerHTML = opts.title;
+      desc.innerHTML = opts.desc;
+      yes.onclick = opts.yes;
+      no.onclick = opts.no ? opts.no : hideLayer;
+      showLayer();
+    }
+    window.pop = pop;
+  })();
+
+
+  var btn = document.getElementById('btn');
+  btn.onclick = function() {
+    pop({
+      img: 'https://facebook.github.io/react/img/logo.svg',
+      title: '自定义命题',
+      desc: '自定义描述',
+      yes: function() {
+        alert('success');
+        hideLayer()
+      }
+    })
+  };
+  btn.click()
+  </script>
+</body>
+
+</html>
