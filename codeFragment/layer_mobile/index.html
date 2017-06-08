@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <style>
+  body{
+  	height: 2000px;
+  }
+  body .layui-m-layer .layui-m-layer-msg {
+    bottom: 48%!important;
+  }
+  .self{
+  	width: 84%!important;
+  }
+  .self .layui-m-layercont{
+  	padding: 20px;
+  }
+  .close-layer{
+  	position: absolute;
+  	right: -10px;
+  	top: -10px;
+
+  }
+  </style>
+</head>
+
+<body>
+  <button id="alert">
+    类似于alert
+  </button>
+  <button id="tip">
+    弱弱的提示
+  </button>
+  <button id="two">
+    有两个按钮
+  </button>
+  <button id="custom">
+  	自定义弹层
+  </button>
+  <script src="layer.js"></script>
+  <script>
+  // http://layer.layui.com/mobile/api.html
+  /*	layer.open({
+      type: 0, // （0表示信息框，1表示页面层，2表示加载层）
+      content: "afds",
+      title: ['标题', 'background-color: #eee;'], //第二个参数可以自定义标题的样式   空，值可以为字符串或者数组。，为空则不显示
+      time: 2000, // 控制自动关闭层所需秒数,默认不设置
+      className: 'popuo-login', // 自定义一个css类 这样就可以在css里面控制该弹层的风格了
+      style: 'border:none; background-color:#78BA32; color:#fff;', // 自定义层的样式
+      anim: 'scale', //可支持的支持动画配置：scale（默认）、up（从下往上弹出），如果不开启动画，设置false即可
+      skin: "msg", // 目前支持配置 footer（即底部对话框风格）、msg（普通提示） 两种风格。
+      shade: 'background-color:rgba(0,0,0,.6)', // 默认：true，该参数可允许你是否显示遮罩，并且定义遮罩风格
+      btn: ['yes', 'no'], // 不设置则不显示按钮。如果只需要一个按钮，则btn: '按钮'，如果有两个，则：btn: ['按钮一', '按钮二']。
+      yes: function(index) {
+        alert('yes');
+        layer.close(index);
+      },
+      no:function(){
+      	alert('no')
+      }
+
+    })*/
+  //信息框
+  document.getElementById('alert').onclick = function() {
+    layer.open({
+      content: '移动版和PC版不能同时存在同一页面',
+      btn: '我知道了'
+    });
+  }
+
+  document.getElementById('tip').onclick = function() {
+    //提示
+    layer.open({
+      content: 'hello layer',
+      skin: 'msg'
+        //,time: 2 //2秒后自动关闭
+    });
+  }
+
+  document.getElementById('two').onclick = function() {
+    //询问框
+    layer.open({
+      content: '您确定要刷新一下本页面吗？',
+      btn: ['刷新', '不要'],
+      yes: function(index) {
+        location.reload();
+        layer.close(index);
+      }
+    });
+
+  }
+  document.getElementById('custom').onclick = function() {
+    // 自定义
+    layer.open({
+    	className:"self",
+      content: '<img style="display:none" src="http://oimagea7.ydstatic.com/image?url=http%3A%2F%2Fimage.tupian114.com%2F20140422%2F14222721.png&product=picugc&w=150" width="80"><h1>标题</h1><p>oute 1 香港1号干线 ; 首都高速1号羽田线 ; 名古屋高速1号楠线 ; 国道1号 February 1 月1日 ; 2月1日 December 1 月1日 ; 12月1日</p><i class="close-layer">关闭</i>', 
+      btn: [ '立即邀请','查看详情'],
+      yes: function(index) {
+      	alert('立即邀请')
+        layer.close(index);
+      },
+      no:function(index){
+      	alert('查看详情')
+      }
+    });
+
+  }
+  </script>
+</body>
+
+</html>
