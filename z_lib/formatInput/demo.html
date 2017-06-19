@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- type不能是数字，因为不能插入空格  maxlength -->
+  <input type="tel" id="phone" maxlength="13">
+  <script src="formatInput.js"></script>
+  <script>
+  // https://github.com/LoeiFy/Recordum/issues/7
+  // 334格式 187 8798 8989  也就是在第三位和第七位插入空格
+  var phoneInput = document.getElementById('phone');
+
+  formatInput(phoneInput, 3, 7)
+    // 也可以插入中杠
+  // formatInput(phoneInput, 3, 7, '-')
+  </script>
+</body>
+
+</html>

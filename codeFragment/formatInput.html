@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="tel" id="phone" maxlength="13">
+  <script>
+  // https://github.com/LoeiFy/Recordum/issues/7
+  var phoneInput = document.getElementById('phone');
+  // 334格式 187 8798 8989
+/*  phoneInput.oninput = function() {
+    // 得到去掉空格之后的数组
+    var numbers = this.value.replace(/ /g, '').split('');
+    var back = '';
+
+    // 格式化的值赋值给back，在第三个值和第八个值后面加上空格
+    numbers.forEach(function(item, index) {
+      back += item + ((index === 2 || index === 6) ? ' ' : '');
+    })
+
+    // 如果最后一位是空格或者不是数字的话，干掉。如果你在输第一位的时候，那么第一位就是最后一位。
+    var last = back.charAt(back.length - 1);
+    if (last === ' ' || isNaN(last)) {
+      back = back.substr(0, back.length - 1);
+    }
+
+    // 将back赋值给this.value这样就能看到格式化的样式
+    this.value = back;
+  }
+
+*/
+formatInput(phoneInput,3,7," - ")
+
+  /**
+   * [formatInput input在输入的时候，在指定的位置加上指定的字符串]
+   * @author zhm
+   * @anotherdate 2017-06-19T11:34:04+0800
+   * @param       {[node]} el [input元素]
+   * @param       {[number]} [gap] [在哪几个位置，可以多个参数]
+   * @param       {[string]} [splitStr] [不传默认就是空格]
+   * @return      {[type]} [description]
+   */
+  function formatInput(el) {
+    if (el.nodeType !== 1) {
+      throw new Error('el必须是元素');
+    }
+    var len = arguments.length,
+      splitStr = ' ',
+      gapArr;
+
+    if (len === 1) {
+      throw new Error('请传入插入分隔符的位置');
+    }
+    if (typeof arguments[len - 1] === 'string') {
+      splitStr = arguments[len - 1];
+      gapArr = Array.prototype.slice.call(arguments, 1, -1);
+    } else {
+      gapArr = Array.prototype.slice.call(arguments, 1);
+    }
+
+    el.oninput = function() {
+      // 得到去掉分隔符之后的数组
+      var numbers = this.value.split(splitStr).join('').split('');
+      var back = '';
+
+      // 格式化的值赋值给back，在第三个值和第八个值后面加上空格
+      numbers.forEach(function(item, index) {
+        // back += item + ((index === 2 || index === 6) ? ' ' : '');
+        back += item;
+        if (gapArr.indexOf(index + 1) !== -1) {
+          back += splitStr
+        }
+      })
+
+      // 如果最后一位是空格或者不是数字的话，干掉。如果你在输第一位的时候，那么第一位就是最后一位。
+      var last = back.charAt(back.length - 1);
+      if (last === splitStr || isNaN(last)) {
+        back = back.substr(0, back.length - 1);
+      }
+
+      // 将back赋值给this.value这样就能看到格式化的样式
+      this.value = back;
+    }
+
+  }
+  </script>
+  <!--   <h3>这里设置第四位开始加空格</h3>
+ <input data-gap="4" maxlength="24" size="30" autocomplete="off" type="tel" placeholder="请输入卡号" />
+ <button>获取输入值</button>
+ <script>
+ var input = document.querySelectorAll('input')[0]
+ var button = document.querySelectorAll('button')[0]
+ var gap = parseInt(input.getAttribute('data-gap'))
+ // 原理就是获取用户输入内容，格式化处理完成后再填入输入框
+ // numbers始终是去掉空格的我们所需要的真实数据
+ // back是插入空格的
+ input.oninput = function() {
+ // 输入的值 去掉空格 再变成数组
+ var numbers = this.value.split(' ').join('').split('')
+ var back = ''
+ 
+ // 遍历数组，符合条件的加空格  3 4 4 
+ numbers.forEach(function(n, i) {
+ back += n + ((i===2 || i===6 ) ? ' ' : '')
+ })
+ 
+ // 加空格之后的长度
+ var len = back.length
+ // 最后一位
+ var last = back.charAt(len - 1)
+ 
+ // 最后一位是空格或者不是数字的话 舍掉
+ if (last === ' ' || isNaN(last)) {
+ back = back.substring(0, len - 1)
+ }
+ // 再把值填入value
+ this.value = back
+ 
+ var _this = this
+ 
+ setTimeout(function() {
+ _this.setSelectionRange(len, len)
+ _this.focus()
+ }, 0)
+ }
+ 
+ button.onclick = function() {
+ alert(input.value.replace(/\s+/g, ''))
+ } -->
+  </script>
+</body>
+
+</html>

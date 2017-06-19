@@ -4,7 +4,7 @@
     recalc = function() {
       var clientWidth = docEl.clientWidth;
       if (!clientWidth) return;
-      docEl.style.fontSize = 100 * (clientWidth / 375) + 'px';
+      docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
       if (clientWidth > 750) {
         docEl.style.width = "750px";
         docEl.style.marginLeft = "auto";
