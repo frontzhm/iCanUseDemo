@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+</head>
+
+<body>
+<input type="file" id="file">
+<div id="box"></div>
+  <!--   <script src="jquery.min.js"></script>
+  <script>
+  $.post('https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=pLuuEBm1MAeE1rmlycwY8r8z&client_secret=dsvLKbY0MuiyahC6BxqYrlnyz1OkcQnF', function(data) {
+      console.log(data)
+  })
+  </script> -->
+  <script>
+  file.onchange = change;
+  function change(event) {
+      // files是上传的文件列表，通常是单个文件，但是指向的话需要用files[0]
+      var files = event.target.files, file;
+      if (files && files.length > 0) {
+        // 获取目前上传的文件
+        file = files[0];
+        // 下面是关键的关键，通过这个 file 对象生成一个可用的图像 URL
+        // 获取 window 的 URL 工具
+        var URL = window.URL || window.webkitURL;
+        // 通过 file 生成目标 url
+        var imgURL = URL.createObjectURL(file);
+        // console.log(imgURL)
+        var img = new Image();
+        // 显示图片，方便装进canvas
+        img.src=imgURL;
+        // console.log(img)
+        // var width=1200;
+        img.onload=function(){
+          var x=img.width,y=img.height;
+          // var wid=1200;
+          // 图片显示的宽度
+          var wid=document.body.clientWidth;
+          // 用canvas将图片变成base64
+          var myCanvas = document.createElement('canvas');
+          // console.log(myCanvas)
+          myCanvas.width=wid;
+          myCanvas.height=Math.floor(wid*y/x);
+          myCanvas.getContext("2d").drawImage(img, 0, 0, wid, Math.floor(wid*y/x));
+          // data就是base64
+          var data = myCanvas.toDataURL("image/jpeg",0.4);
+          // console.log(data)
+          document.getElementById('box').appendChild(myCanvas)
+          // TakePictureActions.saveImg(this.state.index,data);
+          URL.revokeObjectURL(imgURL);
+        };
+      }
+
+    }
+  </script>
+</body>
+
+</html>
