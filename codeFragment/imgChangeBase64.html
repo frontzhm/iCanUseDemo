@@ -48,7 +48,7 @@
           myCanvas.getContext("2d").drawImage(img, 0, 0, wid, Math.floor(wid*y/x));
           // data就是base64
           var data = myCanvas.toDataURL("image/jpeg",0.4);
-          // console.log(data)
+          alert(data)
           document.getElementById('box').appendChild(myCanvas)
           // TakePictureActions.saveImg(this.state.index,data);
           URL.revokeObjectURL(imgURL);
