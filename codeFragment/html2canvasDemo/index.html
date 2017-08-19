@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>生成漫画</title>
+    <style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    #container {
+        width: 500px;
+        margin: 20px auto;
+    }
+
+    .img-item {
+        width: 500px;
+        height: 184px;
+        background: url(who.jpg) no-repeat;
+        position: relative;
+        /*bottom: 1px solid #000;*/
+    }
+
+    .left-text,
+    .right-text {
+        position: absolute;
+        left: 58px;
+        top: 16px;
+    }
+
+    .right-text {
+        left: 308px;
+    }
+    #img-source{
+      position: absolute;
+    }
+    </style>
+</head>
+
+<body>
+    <section id="container">
+        <div>
+            <ol>
+                <li class="input-item">
+                    <input class="input-left" type="text" maxlength="10" placeholder="第1行左边文字">
+                    <input class="input-right" type="text" maxlength="10" placeholder="第1行右边文字">
+                    <button class="sure"> 确定</button>
+                </li>
+                <li class="input-item">
+                    <input class="input-left" type="text" maxlength="10" placeholder="第1行左边文字">
+                    <input class="input-right" type="text" maxlength="10" placeholder="第1行右边文字">
+                    <button class="sure"> 确定</button>
+                </li>
+                <li class="input-item">
+                    <input class="input-left" type="text" maxlength="10" placeholder="第1行左边文字">
+                    <input class="input-right" type="text" maxlength="10" placeholder="第1行右边文字">
+                    <button class="sure"> 确定</button>
+                </li>
+            </ol>
+            <button id="get-img">生成图片</button>
+        </div>
+        <div id="img-box">
+          
+        </div>
+        <ul id="img-source">
+            <li class="img-item">
+                <p class="left-text">我们是谁</p>
+                <p class="right-text">程序员</p>
+            </li>
+            <li class="img-item">
+                <p class="left-text">我们是谁</p>
+                <p class="right-text">程序员</p>
+            </li>
+            <li class="img-item">
+                <p class="left-text">我们是谁</p>
+                <p class="right-text">程序员</p>
+            </li>
+        </ul>
+
+
+        <img id="img" src="arrow.png" alt="">
+
+    </section>
+   <script src="jquery.min.js"></script>
+   <script src="html2canvas.js"></script>
+   <script>
+   var imgItems = $('.img-item');
+     $('.input-item').each(function(index,inputItem){
+      inputItem = $(inputItem);
+      var leftInput = inputItem.find('.input-left');
+      var rightInput = inputItem.find('.input-right');
+      var sure = inputItem.find('.sure');
+      sure.click(function(){
+        console.log(1)
+        var imgItem = imgItems.eq(index);
+        imgItem.find('.left-text').html(leftInput.val());
+        imgItem.find('.right-text').html(rightInput.val());
+      })
+      
+
+     })
+     var imgBox = $('#img-box')[0];
+     var imgSource = $('#img-source')[0];
+     $('#get-img').click(function(event){
+      event.preventDefault();
+      html2canvas($('#img')[0], {
+          allowTaint: true,
+          taintTest: false,
+          logging:true,
+          onrendered: function(canvas) {
+              canvas.id = "mycanvas";
+              //document.body.appendChild(canvas);
+              //生成base64图片数据
+              var dataUrl = canvas.toDataURL();
+              var newImg = document.createElement("img");
+              newImg.src = dataUrl;
+              imgBox.appendChild(newImg);
+          }
+      });
+     })
+   </script>
+</body>
+
+</html>
